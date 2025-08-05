@@ -1,0 +1,88 @@
+/* Main app container: center everything, white background */
+.emotion-app {
+  min-height: 100vh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* Title styling */
+.title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 32px;
+  color: #222;
+  letter-spacing: 1px;
+}
+
+/* Webcam wrapper for responsive sizing */
+.webcam-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  max-width: 90vw;
+  margin-bottom: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  background: #f8f8f8;
+  overflow: hidden;
+}
+
+/* Webcam video styling */
+.webcam-video {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+/* Start Detection button styling */
+.detect-btn {
+  margin-top: 12px;
+  padding: 14px 36px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  background: #4f8cff;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(79,140,255,0.08);
+  transition: background 0.2s;
+}
+
+.detect-btn:disabled {
+  background: #b3cdfa;
+  cursor: not-allowed;
+}
+
+/* Emotion result styling */
+.emotion-result {
+  margin-top: 32px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #222;
+  min-height: 3rem;
+  text-align: center;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 600px) {
+  .webcam-wrapper {
+    width: 100vw;
+    max-width: 100vw;
+    border-radius: 0;
+  }
+  .webcam-video {
+    border-radius: 0;
+  }
+  .title {
+    font-size: 1.5rem;
+  }
+  .emotion-result {
+    font-size: 1.5rem;
+  }
+} 
