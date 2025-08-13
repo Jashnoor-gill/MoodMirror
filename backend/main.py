@@ -19,7 +19,6 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger(__name__)
-logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="MoodMirror API",
@@ -37,6 +36,7 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+)
 
 class ImageRequest(BaseModel):
     image: str
