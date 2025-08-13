@@ -1,6 +1,9 @@
-fastapi
-uvicorn
-opencv-python
-tensorflow
-torch
-python-multipart 
+fastapi==0.116.1
+uvicorn==0.35.0
+fer==22.4.0
+opencv-python==4.12.0.88
+numpy==2.2.6
+python-multipart==0.0.9
+moviepy==1.0.3
+tensorflow==2.19.0
+pillow==11.3.0
