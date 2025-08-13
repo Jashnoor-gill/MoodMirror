@@ -11,6 +11,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import Aurora from './Aurora';
 import './App.css';
 
 // Register ChartJS components
@@ -167,18 +168,55 @@ function App() {
       {
         label: 'Confidence',
         data: emotionHistory.map(entry => entry.confidence),
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1
+        borderColor: '#00CDC4',
+        backgroundColor: 'rgba(108, 92, 231, 0.1)',
+        borderWidth: 2,
+        tension: 0.4,
+        fill: true,
+        pointBackgroundColor: '#6C5CE7',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: '#6C5CE7'
       }
     ]
   };
 
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        labels: {
+          color: '#fff'
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: {
+          color: 'rgba(255, 255, 255, 0.1)'
+        },
+        ticks: {
+          color: '#fff'
+        }
+      },
+      y: {
+        grid: {
+          color: 'rgba(255, 255, 255, 0.1)'
+        },
+        ticks: {
+          color: '#fff'
+        }
+      }
+    }
+  };
+
   return (
     <div className="emotion-app">
+      <Aurora />
       <h1 className="title">MoodMirror - Emotion Detection</h1>
       
       <div className="main-container">
-        <div className="webcam-section">
+        <div className="webcam-section glass-card">
           <div className="webcam-wrapper">
             <Webcam
               audio={false}
@@ -235,13 +273,13 @@ function App() {
           )}
         </div>
 
-        <div className="stats-section">
-          <h2>Statistics</h2>
+        <div className="stats-section glass-card">
+          <h2 className="section-title">Real-time Analytics</h2>
           <div className="chart-container">
-            <Line data={chartData} options={{ responsive: true }} />
+            <Line data={chartData} options={chartOptions} />
           </div>
           
-          <h3>Emotion Distribution</h3>
+          <h3 className="section-subtitle">Emotion Distribution</h3>
           <div className="stats-grid">
             {Object.entries(statistics).map(([emotion, count]) => (
               <div key={emotion} className="stat-item">

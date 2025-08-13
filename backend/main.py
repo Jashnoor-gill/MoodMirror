@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from fer import FER
+from fer.fer import FER  # Import FER directly from fer module
 import cv2
 import numpy as np
 import base64
@@ -18,6 +18,7 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
+logger = logging.getLogger(__name__)
 logger = logging.getLogger(__name__)
 
 app = FastAPI(
@@ -80,17 +81,20 @@ async def predict_emotion(request: ImageRequest):
         if result:
             faces = []
             for face in result:
-                emotions = face["emotions"]
+                # Convert numpy types to Python native types
+                emotions = {k: float(v) for k, v in face["emotions"].items()}  # Convert emotion values to float
                 dominant_emotion = max(emotions.items(), key=lambda x: x[1])
+                box = [int(x) for x in face["box"]]  # Convert box coordinates to int
+                
                 face_data = {
                     "dominant_emotion": dominant_emotion[0],
-                    "confidence": dominant_emotion[1],
+                    "confidence": float(dominant_emotion[1]),  # Ensure confidence is float
                     "emotions": emotions,
-                    "box": face["box"]
+                    "box": box
                 }
                 faces.append(face_data)
                 
-            processing_time = (datetime.now() - start_time).total_seconds()
+            processing_time = float((datetime.now() - start_time).total_seconds())  # Ensure processing_time is float
             
             logger.info(f"Successfully processed image with {len(faces)} faces detected")
             return {
